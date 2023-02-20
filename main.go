@@ -14,7 +14,7 @@ func main() {
 	fmt.Println(xMatrix)
 }
 
-// количество экспериментов
+// experiments count
 func fillNArray() []float64 {
 	var size = getArraySizeFromInput("array of N")
 
@@ -31,26 +31,30 @@ func fillNArray() []float64 {
 	return arrN
 }
 
-// Fill x1, x2 like matrix
-func fillXMatrix() [][]float64 {
+// Fill x1, x2, y like matrix
+func fillXMatrix() [][][]float64 {
 	fmt.Println("Input count of elements (X) in array")
 
 	var size = getArraySizeFromInput("multidimensional array of X")
-	var value float64
-	var matrix = make([][]float64, size)
-	var err error
+	var matrix = make([][][]float64, size)
+
+	for i := range matrix {
+		matrix[i] = make([][]float64, size)
+		for j := range matrix {
+			matrix[i][j] = make([]float64, size)
+		}
+	}
 
 	for i := 0; i < size; i++ {
-		fmt.Println("Array ", i+1, ":")
 		for j := 0; j < size; j++ {
-			fmt.Println("Array ", j+1, " число:")
+			for k := 0; k < size; k++ {
+				fmt.Println("Array x1-x2-y values:")
 
-			_, err = fmt.Scan(&value)
-			if err != nil {
-				log.Fatal(err)
+				_, err := fmt.Scan(&matrix[i][j][k])
+				if err != nil {
+					log.Fatal(err)
+				}
 			}
-
-			matrix[i] = append(matrix[i], value)
 		}
 	}
 
@@ -60,7 +64,7 @@ func fillXMatrix() [][]float64 {
 func getArraySizeFromInput(arrayName string) int {
 	var size int
 
-	fmt.Println("Input count of elements (%s) in array", arrayName)
+	fmt.Printf("Input count of elements (%s) in array\n", arrayName)
 	_, err := fmt.Scan(&size)
 
 	if err != nil {
