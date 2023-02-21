@@ -35,7 +35,7 @@ func calculateLeastSquares() {
 	a := (n*sumXY - sumX*sumY) / base
 	b := (sumXX*sumY - sumXY*sumX) / base
 
-	fmt.Println("a = %g, b = %g", a, b)
+	fmt.Printf("a = %g, b = %g", a, b)
 }
 
 func createPoints() []Point {
